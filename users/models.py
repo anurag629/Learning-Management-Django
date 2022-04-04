@@ -44,3 +44,19 @@ class Grade(models.Model):
     ut12 = models.ImageField(upload_to='plots', blank=True)
     ut23 = models.ImageField(upload_to='plots', blank=True)
     ut33 = models.ImageField(upload_to='plots', blank=True)
+
+
+class Section(models.Model):
+    section = models.CharField(max_length=200, blank=True)
+
+    def __str__(self):
+        return self.section
+
+
+class Question(models.Model):
+    section = models.ForeignKey(
+        "Section", on_delete=models.CASCADE, null=True, blank=True)
+    question_field = models.CharField(max_length=2000, blank=True, null=True)
+
+    def __str__(self):
+        return self.question_field
