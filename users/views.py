@@ -1,7 +1,9 @@
-from pyexpat.errors import messages
+from django.contrib import messages
 from django.shortcuts import render, redirect
 
 from users.forms import UserRegisterForm
+from django.contrib.auth.models import User
+
 
 # Create your views here.
 
@@ -16,7 +18,7 @@ def register(request):
                 request, f'Account created for the {username} successfully!')
             return redirect('login')
 
-        else:
-            form = UserRegisterForm()
+    else:
+        form = UserRegisterForm()
 
-        return render(request, 'user/register.html', {'form': form})
+    return render(request, 'users/register.html', {'form': form})
