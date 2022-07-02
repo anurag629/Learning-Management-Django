@@ -69,7 +69,7 @@ class Question(models.Model):
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    answer_field = models.ForeignKey(max_length=2500, blank=True, null=True)
+    answer_field = models.CharField(max_length=2500, blank=True, null=True)
 
     def __str__(self):
         return f"{self.user} answered {self.answer_field}"
