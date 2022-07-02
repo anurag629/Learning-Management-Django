@@ -1,4 +1,6 @@
+from distutils.command.upload import upload
 from email.policy import default
+from pickle import TRUE
 from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
@@ -26,3 +28,23 @@ class Profile(models.Model):
         if img.height > 300 or img.width > 300:
             output_size = (300, 300)
             img.thumbnail(output_size)
+            img.save(self.image.path)
+
+
+class Grade(models.Model):
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE)
+    ut1 = models.CharField(max_length=200, blank=True)
+    ut2 = models.CharField(max_length=200, blank=True)
+    ut3 = models.CharField(max_length=200, blank=True)
+
+    ut1p = models.ImageField(upload_to='plots', blank=True)
+    ut2p = models.ImageField(upload_to='plots', blank=True)
+    ut3p = models.ImageField(upload_to='plots', blank=True)
+
+    ut1pb = models.ImageField(upload_to='plots', blank=True)
+    ut2pb = models.ImageField(upload_to='plots', blank=True)
+    ut3pb = models.ImageField(upload_to='plots', blank=True)
+
+    ut12 = models.ImageField(upload_to='plots', blank=True)
+    ut13 = models.ImageField(upload_to='plots', blank=True)
+    ut23 = models.ImageField(upload_to='plots', blank=True)
